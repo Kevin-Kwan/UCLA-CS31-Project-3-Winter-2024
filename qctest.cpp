@@ -5,15 +5,15 @@
 //
 // UCLA CS31 Winter 2024 Project 3
 // UCLA CS31 Winter 2024 Programming Assignment 3
-// This program validates and analyzes string QC test results. 
+// This program validates and analyzes string QC test results.
 // It checks if a QC result string is valid, calculates the total number of tests, passes, defects, and batches, and handles errors appropriately.
-// 
+//
 // This program is written in C++ and compiled using g++.
-// Comments have been added for understanding and viewing pleasure. 
+// Comments have been added for understanding and viewing pleasure.
 //
 // I am not responsible for any mistakes or errors in this program.
 // Use at your own risk.
-// 
+//
 // ***************************************************************
 
 using namespace std;
@@ -30,7 +30,8 @@ using namespace std;
 // - the total number of QC tests in a batch must equal the number of pass and defect test results.
 // - the total number of QC tests in a batch must be greater than zero (0).
 // - a single result string may include multiple batches of results
-bool isValidQC(string results) {
+bool isValidQC(string results)
+{
     // You can get a good understand of regex matching from a proper university class or online.
     regex pattern("Q([1-9][0-9]*)(p(0|[1-9][0-9]*)d(0|[1-9][0-9]*)|d(0|[1-9][0-9]*)p(0|[1-9][0-9]*))");
     smatch match;
@@ -43,15 +44,22 @@ bool isValidQC(string results) {
     // match[4] is the number of defects (nums following d)
     // match[5] is the number of defects (nums following d)
     // match[6] is the number of passes (nums following p)
-    while (regex_search(results, match, pattern)) {
+    while (regex_search(results, match, pattern))
+    {
         totalTests += stoi(match[1]);
-        if (match[2].str()[0] == 'p') {
-            if (match[3].matched) passes += stoi(match[3]);
-            if (match[4].matched) defects += stoi(match[4]);
+        if (match[2].str()[0] == 'p')
+        {
+            if (match[3].matched)
+                passes += stoi(match[3]);
+            if (match[4].matched)
+                defects += stoi(match[4]);
         }
-        else {
-            if (match[5].matched) defects += stoi(match[5]);
-            if (match[6].matched) passes += stoi(match[6]);
+        else
+        {
+            if (match[5].matched)
+                defects += stoi(match[5]);
+            if (match[6].matched)
+                passes += stoi(match[6]);
         }
         // Update results to be the suffix of the previous match so we can continue finding matches
         results = match.suffix().str();
@@ -61,12 +69,15 @@ bool isValidQC(string results) {
 
 // This function returns the total number of pass test results from all the batches reported in the string.
 // If the string is not valid, it returns -1.
-int passQC(string results) {
-    if (!isValidQC(results)) return -1;
+int passQC(string results)
+{
+    if (!isValidQC(results))
+        return -1;
     regex pattern("p(0|[1-9][0-9]*)");
     smatch match;
     int passes = 0;
-    while (regex_search(results, match, pattern)) {
+    while (regex_search(results, match, pattern))
+    {
         passes += stoi(match[1]);
         results = match.suffix().str();
     }
@@ -75,12 +86,15 @@ int passQC(string results) {
 
 // This function returns the total number of defect test results from all the batches reported in the string.
 // If the string is not valid, it returns -1.
-int defectQC(string results) {
-    if (!isValidQC(results)) return -1;
+int defectQC(string results)
+{
+    if (!isValidQC(results))
+        return -1;
     regex pattern("d(0|[1-9][0-9]*)");
     smatch match;
     int defects = 0;
-    while (regex_search(results, match, pattern)) {
+    while (regex_search(results, match, pattern))
+    {
         defects += stoi(match[1]);
         results = match.suffix().str();
     }
@@ -89,12 +103,15 @@ int defectQC(string results) {
 
 // This function returns the total number of tests from all the batches reported in the string.
 // If the string is not valid, it returns -1.
-int totalQC(string results) {
-    if (!isValidQC(results)) return -1;
+int totalQC(string results)
+{
+    if (!isValidQC(results))
+        return -1;
     regex pattern("Q([1-9][0-9]*)");
     smatch match;
     int totalTests = 0;
-    while (regex_search(results, match, pattern)) {
+    while (regex_search(results, match, pattern))
+    {
         totalTests += stoi(match[1]);
         results = match.suffix().str();
     }
@@ -103,12 +120,15 @@ int totalQC(string results) {
 
 // This function returns the total number of batches reported in the string.
 // If the string is not valid, it returns -1.
-int batches(string results) {
-    if (!isValidQC(results)) return -1;
+int batches(string results)
+{
+    if (!isValidQC(results))
+        return -1;
     regex pattern("Q");
     smatch match;
     int batches = 0;
-    while (regex_search(results, match, pattern)) {
+    while (regex_search(results, match, pattern))
+    {
         batches++;
         results = match.suffix().str();
     }
@@ -116,7 +136,8 @@ int batches(string results) {
 }
 
 // Main function for testing our functions.
-int main() {
+int main()
+{
     // Test cases taken from the .pdf
     assert(isValidQC("") == false);
     assert(isValidQC("  ") == false);
