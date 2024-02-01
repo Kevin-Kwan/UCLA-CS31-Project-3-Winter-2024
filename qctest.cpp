@@ -31,7 +31,7 @@ using namespace std;
 // - a single result string may include multiple batches of results
 bool isValidQC(string results)
 {
-    // You can get a good understand of regex matching from a proper university class or online.
+    // You can get a good understanding of regex matching from a proper university class or online.
     regex pattern("Q([1-9][0-9]*)(p(0|[1-9][0-9]*)d(0|[1-9][0-9]*)|d(0|[1-9][0-9]*)p(0|[1-9][0-9]*))");
     smatch match;
     int totalTests = 0, passes = 0, defects = 0;

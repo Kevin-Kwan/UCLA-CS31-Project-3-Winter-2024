@@ -2,6 +2,8 @@
 
 ## Results
 
+Feel free to contact me if you have access to the test cases or if you have the ability to run them on my code.
+
 I currently don't have the ability to run the test cases on my code yet. Check back at another time to see how I scored.
 
 ## Disclaimer
